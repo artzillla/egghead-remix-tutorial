@@ -30,7 +30,6 @@ type LoaderData = {
 };
 
 export async function loader({ request }: LoaderArgs) {
-  console.log(ENV);
   return json<LoaderData>({
     user: await getUser(request),
     ENV: getEnv(),
@@ -39,7 +38,6 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function App() {
   const data = useLoaderData<LoaderData>();
-  console.log(ENV.ADMIN_EMAIL);
 
   return (
     <html lang="en" className="h-full">

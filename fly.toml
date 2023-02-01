@@ -1,4 +1,4 @@
-app = "egghead-tutorial-4665"
+app = "egghead-remix-tutorial"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
