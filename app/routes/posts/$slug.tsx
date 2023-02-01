@@ -1,3 +1,4 @@
+import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getPost } from "~/models/post.server";
@@ -9,10 +10,10 @@ type LoaderData = {
   html: string;
 };
 
-export const loader = async ({ params }) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const { slug } = params;
   invariant(slug, "Slug is required");
-  const post = await getPost(params.slug);
+  const post = await getPost(slug);
   invariant(post, `Post ${params.slug} not found`);
   return json<LoaderData>({ title: post.title, html: marked(post.markdown) });
 };

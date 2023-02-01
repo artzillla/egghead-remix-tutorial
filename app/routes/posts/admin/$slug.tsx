@@ -6,13 +6,14 @@ import {
   useParams,
   useTransition,
 } from "@remix-run/react";
-import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
+import type { Post } from "~/models/post.server";
 import {
   createPost,
   deletePost,
   getPost,
-  Post,
   updatePost,
 } from "~/models/post.server";
 import invariant from "tiny-invariant";
@@ -83,7 +84,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     throw new Response("Not found", { status: 404 });
   }
 
-  return json<LoaderData>({ post });
+  return json<LoaderData>({ post: post as Post });
 };
 
 export default function AdminNewRoute() {
